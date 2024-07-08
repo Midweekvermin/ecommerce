@@ -27,7 +27,7 @@ public class Product {
     specifies the column in the database tables that is used to join the entities.
     `name = category_id"`: foreign key column in the product table is named category_id.
     `nullable = false`: Specifies that the category_id cannot be null, this means
-    that every product musst be associated with a ProductCategory.
+    that every product must be associated with a ProductCategory.
     */
     private ProductCategory category; // owns products set in ProductCategory.java for the many to one relationship
 

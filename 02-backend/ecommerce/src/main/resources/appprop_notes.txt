@@ -1,0 +1,37 @@
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+// tells spring boot what driver to use to connect to the MySQL database
+
+spring.datasource.url=jdbc:mysql://localhost:3306/full-stack-ecommerce?useSSL=false&useUnicode=yes&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&serverTimezone=UTC
+/*
+* jdbc:mysql://localhost:3306/full-stack-ecommerce:
+Connects to a MySQL database named full-stack-ecommerce running on localhost at port 3306.
+* useSSL=false:
+ Disables SSL for the connection.
+* useUnicode=yes:
+Enables the use of Unicode character sets.
+* characterEncoding=UTF-8:
+Sets the character encoding to UTF-8.
+* allowPublicKeyRetrieval=true:
+Allows the retrieval of the public key for authentication, useful for some MySQL configurations.
+* serverTimezone=UTC:
+Sets the server time zone to UTC.
+*/
+
+spring.datasource.username=ecommerceapp
+spring.datasource.password=ecommerceapp
+
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+/*
+Configures the Hibernate dialect to be used for communicating with the database.
+The MySQL8Dialect is optimized for MySQL 8.x versions, enabling Hibernate to generate SQL optimized
+for MySQL 8.
+ */
+
+spring.data.rest.base-path=/api
+/*
+Sets the base path for all REST endpoints provided by Spring Data REST.
+This means that all RESTful API endpoints will be prefixed with /api.
+*/
+
+Spring Boot automatically configures the EntityManagerFactory
+and TransactionManager based on the JPA and data source properties defined in application.properties
