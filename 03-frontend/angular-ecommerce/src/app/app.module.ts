@@ -11,6 +11,7 @@ import { Routes, RouterModule } from '@angular/router';
 //create routes for loading pages. path specifies the URL we want to match.
 // when it matches it will load the selected component.
 // pathMatch ensures that the full URL is matched before redirecting.
+
 const routes: Routes = [
   {path: 'category/:id', component: ProductListComponent},
   {path: 'category', component: ProductListComponent},
