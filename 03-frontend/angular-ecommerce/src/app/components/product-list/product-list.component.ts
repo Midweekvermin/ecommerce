@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../common/product';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   //Selectors instruct angular to instantiate the component when the tag appears
@@ -11,15 +12,24 @@ import { Product } from '../../common/product';
 export class ProductListComponent implements OnInit {
 
 products: Product[] = [];
-  constructor(private productService: ProductService) {
-  
-  }
+currentCategoryId: number = 1;
+  constructor(private productService: ProductService,
+    private route: ActivatedRoute) {}
   //ngOnInit is called when the component is initialized one of the lifecycle hooks
   ngOnInit(): void {
+    this.route.paramMap.subscribe(()=> {
     this.listProducts();
+  });
   }
   listProducts() {
-    this.productService.getProductList().subscribe(data => {
+const hasCategoryId: boolean = this.route.snapshot.paramMap.has('id');
+if(hasCategoryId){
+  this.currentCategoryId = +this.route.snapshot.paramMap.get('id')!;
+}else {
+  this.currentCategoryId = 1;
+}
+
+    this.productService.getProductList(this.currentCategoryId).subscribe(data => {
       this.products = data;
     })
   }
