@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { Product } from '../common/product';
+import { ProductCategory } from '../common/product-category';
 //created using ng generate service folder/name
 /*
 In Angular, a service is a class that provides reusable functionality
@@ -17,18 +18,19 @@ In Angular, a service is a class that provides reusable functionality
 export class ProductService {
 
   //baseUrl defines where the api endpoint returns the list of products
-  private baseUrl = 'http://localhost:8080/api/products' 
+  private baseUrl = 'http://localhost:8080/api/products' ;
   //consturctor injects httpclient for http requests
+  private categoryURL = 'http://localhost:8080/api/product-category';
   constructor(private httpClient: HttpClient) { }
 
   getProductList(theCategoryId: number) : Observable<Product[]> {
 
     const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}`
 
-    return this.httpClient.get<GetResponse>(searchUrl)
+    return this.httpClient.get<GetResponseProducts>(searchUrl)
     .pipe(map(response => response._embedded.products));
   }
-}
+
 /*
  `getProductList() : Observable<Product[]>` : this initializes a function with the return
  type of Observable<Product[]> this returns and Observable that emits an array of Product objects.
@@ -42,9 +44,22 @@ export class ProductService {
   products array from the _embedded object in the response. (have chatgpt explain better)
 */
 
-interface GetResponse{
+getProductCategories(): Observable<ProductCategory[]> {
+  return this.httpClient.get<GetResponseProductCategory>(this.categoryURL)
+  .pipe(map(response => response._embedded.productCategory));
+}
+}
+
+
+
+interface GetResponseProducts{
   _embedded: {
     products: Product[];
+  }
+}
+interface GetResponseProductCategory{
+  _embedded: {
+    productCategory: ProductCategory[];
   }
 }
 /* defines the expected structure of the response from the api

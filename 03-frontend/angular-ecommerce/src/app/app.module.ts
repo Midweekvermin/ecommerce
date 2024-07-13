@@ -7,6 +7,7 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { HttpClientModule } from '@angular/common/http';
 import { ProductService } from './services/product.service';
 import { Routes, RouterModule } from '@angular/router';
+import { ProductCategoryMenuComponent } from './components/product-category-menu/product-category-menu.component';
 
 //create routes for loading pages. path specifies the URL we want to match.
 // when it matches it will load the selected component.
@@ -23,7 +24,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    ProductListComponent
+    ProductListComponent,
+    ProductCategoryMenuComponent
   ],
   imports: [
     BrowserModule,
