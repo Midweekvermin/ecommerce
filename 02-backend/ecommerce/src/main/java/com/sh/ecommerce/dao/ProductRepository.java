@@ -22,6 +22,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     // Springboot automatically creates a query in the background
     // `SELECT * FROM product WHERE category_id=`
     //exposes the /api/products/search/findByCategoryId endpoint
+    //used with ?id=1 for example findByCategoryId?id=1
+    Page<Product> findByNameContaining(@Param("name") String name, Pageable pageable);
 }
 /*
 *The ProductCategoryRepository extends JpaRepository,

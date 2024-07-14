@@ -17,6 +17,7 @@ In Angular, a service is a class that provides reusable functionality
 })
 export class ProductService {
 
+
   //baseUrl defines where the api endpoint returns the list of products
   private baseUrl = 'http://localhost:8080/api/products' ;
   //consturctor injects httpclient for http requests
@@ -27,8 +28,7 @@ export class ProductService {
 
     const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}`
 
-    return this.httpClient.get<GetResponseProducts>(searchUrl)
-    .pipe(map(response => response._embedded.products));
+    return this.getProducts(searchUrl);
   }
 
 /*
@@ -48,6 +48,17 @@ getProductCategories(): Observable<ProductCategory[]> {
   return this.httpClient.get<GetResponseProductCategory>(this.categoryURL)
   .pipe(map(response => response._embedded.productCategory));
 }
+
+searchProducts(theKeyword: string) {
+  const searchUrl = `${this.baseUrl}/search/findByNameContaining?name=${theKeyword}`
+
+    return this.getProducts(searchUrl);
+}
+
+  private getProducts(searchUrl: string) {
+    return this.httpClient.get<GetResponseProducts>(searchUrl)
+      .pipe(map(response => response._embedded.products));
+  }
 }
 
 
