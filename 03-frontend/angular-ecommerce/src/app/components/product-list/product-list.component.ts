@@ -13,6 +13,8 @@ export class ProductListComponent implements OnInit {
 
   products: Product[] = [];
   currentCategoryId: number = 1;
+  currentPage: number = 0;
+  pageSize: number = 5;
 searchMode: boolean = false;
 
   constructor(private productService: ProductService,
@@ -44,10 +46,15 @@ handleListProducts(){
     this.currentCategoryId = 1;
   }
 
-  this.productService.getProductList(this.currentCategoryId).subscribe(data => {
+  this.productService.getProductList(this.currentCategoryId, this.currentPage, this.pageSize).subscribe(data => {
     this.products = data;
   })
 }
+
+pageChange(page:number){
+  this.productService.getProductList(this.currentCategoryId, page, this.pageSize).subscribe(data => {
+    this.products = data;
+})}
 
 handleSearchProducts(){
   const theKeyword: string = this.route.snapshot.paramMap.get('keyword')!;

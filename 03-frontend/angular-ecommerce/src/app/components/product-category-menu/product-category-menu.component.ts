@@ -19,7 +19,7 @@ ngOnInit(){
   listProductCategories() {
    this.productService.getProductCategories().subscribe(
     data => {
-      console.log('Product Categories=' + JSON.stringify(data));
+      
       this.productCategories = data;
     }
    );

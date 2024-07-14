@@ -22,6 +22,7 @@ export class ProductService {
   private baseUrl = 'http://localhost:8080/api/products' ;
   //consturctor injects httpclient for http requests
   private categoryURL = 'http://localhost:8080/api/product-category';
+  
   constructor(private httpClient: HttpClient) { }
 
   getProduct(theId: number) : Observable<Product> {
@@ -32,9 +33,10 @@ export class ProductService {
   }
 
 
-  getProductList(theCategoryId: number) : Observable<Product[]> {
+  getProductList(theCategoryId: number, currentPage: number, pageSize: number) : Observable<Product[]> {
 
-    const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}`
+    const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}
+    &page=${currentPage}&size=${pageSize}`
 
     return this.getProducts(searchUrl);
   }
