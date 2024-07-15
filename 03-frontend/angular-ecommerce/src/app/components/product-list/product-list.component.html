@@ -17,6 +17,7 @@
                          </div>
                     </div>
                     <div *ngIf="products?.length ==5">
+                         <p style="display: inline;">Page: </p>
                          <button (click)="pageChange(0)" type="button" class="btn btn-light" mdbRipple rippleColor="dark">1</button>
                          <button (click)="pageChange(1)" type="button" class="btn btn-light" mdbRipple rippleColor="dark">2</button>
                          <button (click)="pageChange(2)" type="button" class="btn btn-light" mdbRipple rippleColor="dark">3</button>
