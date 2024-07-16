@@ -3,7 +3,7 @@
         <img src="{{product.imageUrl}}" class="img-responsive" />
         <h1> {{product.name}} </h1>
         <p>Price: {{product.unitPrice | currency:'USD'}}
-            <button routerLink="#" type="button" class="btn btn-primary" mdbRipple>Add to cart</button>
+            <button (click)="addIt(product)" routerLink="/products" type="button" class="btn btn-primary" mdbRipple>Add to cart</button>
         </p>
         <button routerLink="/products" type="button" class="btn btn-secondary" mdbRipple>
             Go Back </button>

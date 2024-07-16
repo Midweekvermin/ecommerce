@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../common/product';
 import { ActivatedRoute } from '@angular/router';
+import { CartItem } from '../../common/cart-item';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   //Selectors instruct angular to instantiate the component when the tag appears
@@ -18,7 +20,8 @@ export class ProductListComponent implements OnInit {
 searchMode: boolean = false;
 
   constructor(private productService: ProductService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private cartService: CartService) { }
   //ngOnInit is called when the component is initialized one of the lifecycle hooks
   ngOnInit(): void {
     this.route.paramMap.subscribe(() => {
@@ -69,6 +72,11 @@ handleSearchProducts(){
 addToCart(theProduct: Product) {
 
   console.log(`Adding to cart: ${theProduct.name}, ${theProduct.unitPrice}`);
+
+  const theCartItem = new CartItem(theProduct);
+  this.cartService.addToCart(theCartItem);
+  alert('Item added to cart.');
+
 }
 
 }
