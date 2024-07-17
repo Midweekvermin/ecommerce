@@ -7,11 +7,13 @@
                     <th with="20%"> Product Image</th>
                     <th with="20%"> Product Detail</th>
                     <th with="20%"> Product price</th>
+                    
                 </tr>
                 <tr *ngFor="let items of cartItems">
                     <td><img width="250" src={{items.imageUrl}}></td>
                     <td>{{items.name}} x{{items.quantity}}</td>
-                    <td>{{items.unitPrice | currency:'USD'}}</td>
+                    <td>{{items.unitPrice | currency:'USD'}}   <button class="alignt-top"(click)="removeItem(items)">Remove</button></td>
+                    
                 </tr>
                 <tr>
                     <td></td>

@@ -27,4 +27,16 @@ ngOnInit(): void {
     this.cartService.computeCartTotals();
   }
 
+  removeItem(item: CartItem){
+    item.quantity--
+    this.cartService.computeCartTotals();
+    
+    if(item.quantity <= 0){
+      const itemIndex = this.cartItems.findIndex(tempItem => tempItem.id === item.id);
+      this.cartService.cartItems.splice(itemIndex,1);
+      this.listCartDetails();
+    }
+    //@TODO set a remove all button if item.quantity is greater than 1
+  }
+
 }
