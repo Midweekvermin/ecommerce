@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 @CrossOrigin("http://localhost:4200") // allows calls from browser scrips from this origin
 //^ also fixes the Cors error
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface ProductRepository extends JpaRepository<Product /*entityclass*/, Long/*
+primary key type*/> {
 
     Page<Product> findByCategoryId(@Param("id") Long id, Pageable pageable);
 //    Page<Product>: Returns a paginated list of products.
