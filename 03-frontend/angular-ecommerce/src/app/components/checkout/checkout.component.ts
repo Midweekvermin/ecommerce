@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormGroupName } from '@angular/forms';
 import { ShopFormService } from '../../services/shop-form.service';
 import { Country } from '../../common/country';
+import { State } from '../../common/state';
 
 @Component({
   selector: 'app-checkout',
@@ -12,7 +13,10 @@ export class CheckoutComponent implements OnInit{
 
 
 
+
   checkoutFormGroup!: FormGroup;
+  shippingAddressStates: State [] = [];
+  billingAddressStates: State [] = [];
 
     totalPrice: number = 0;
     totalQuantity: number = 0.00;
@@ -108,5 +112,22 @@ export class CheckoutComponent implements OnInit{
       }
      )
       }
+
+      getStates(formGroupName: string) {
+        const formGroup = this.checkoutFormGroup.get(formGroupName);
+        const countryCode = formGroup?.value.country.code;
+        const countryName = formGroup?.value.country.name;
+        this.ShopFormService.getStates(countryCode).subscribe(data =>
+        {
+          if(formGroupName === 'shippingAddress') {
+            this.shippingAddressStates = data;
+          }
+          else {
+            this.billingAddressStates = data;
+          }
+          formGroup?.get('state')?.setValue(data[0]);
+        }
+        )
+        }
 
 }
