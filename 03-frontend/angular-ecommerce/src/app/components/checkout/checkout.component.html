@@ -37,7 +37,11 @@
                             <label>Email</label>
                             <div class="col-md-9">
                                 <div class="input-space">
-                                    <input formControlName="email" type="text">
+                                    <input formControlName="email" type="text"> 
+                                    <div *ngIf="email?.invalid && (email?.dirty || email?.touched)"
+                                    class="alert alert-danger mt-1">
+                                        Please enter a valid email
+                                    </div>
                                 </div>
                             </div>
                         </div>
