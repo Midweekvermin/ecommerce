@@ -88,8 +88,9 @@ export class CheckoutComponent implements OnInit{
   get email() {return this.checkoutFormGroup.get('customer.email');}
 
   onSubmit(){
-    console.log(this.checkoutFormGroup.get('customer')!.value);
-    console.log(this.checkoutFormGroup.get('customer')!.value.email);
+   if(this.checkoutFormGroup.invalid){
+    this.checkoutFormGroup.markAllAsTouched();
+   }
   }
 
   copyShippingAddressToBillingAddress(event: Event) {
