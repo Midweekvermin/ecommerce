@@ -10,6 +10,10 @@
                             <div class="col-md-9">
                                 <div class="input-space">
                                     <input formControlName="firstName" type="text">
+                                    <div *ngIf="firstName?.invalid && (firstName?.dirty || firstName?.touched)"
+                                    class="alert alert-danger mt-1">
+                                        First name must be at least 2 characters.
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -20,6 +24,10 @@
                             <div class="col-md-9">
                                 <div class="input-space">
                                     <input formControlName="lastName" type="text">
+                                    <div *ngIf="lastName?.invalid && (lastName?.dirty || lastName?.touched)"
+                                    class="alert alert-danger mt-1">
+                                        Last name must be at least 2 characters.
+                                    </div>
                                 </div>
                             </div>
                         </div>

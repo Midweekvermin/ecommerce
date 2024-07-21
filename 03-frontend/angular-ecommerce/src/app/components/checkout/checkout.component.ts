@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormGroupName } from '@angular/forms';
+import { FormBuilder, FormGroup, FormGroupName, Validators } from '@angular/forms';
 import { ShopFormService } from '../../services/shop-form.service';
 import { Country } from '../../common/country';
 import { State } from '../../common/state';
+import { Shopvalidators } from '../../validators/shopvalidators';
 
 @Component({
   selector: 'app-checkout',
@@ -13,7 +14,7 @@ export class CheckoutComponent implements OnInit{
 
 
 
-
+  static checkoutFormGroup: any;
   checkoutFormGroup!: FormGroup;
   shippingAddressStates: State [] = [];
   billingAddressStates: State [] = [];
@@ -23,6 +24,8 @@ export class CheckoutComponent implements OnInit{
     creditCardYears: number[] = [];
     creditCardMonths: number[] = [];
     countries:Country[] =[];
+    
+    
   constructor(private formBuilder:FormBuilder,
     private ShopFormService:ShopFormService,
   ){}
@@ -31,9 +34,10 @@ export class CheckoutComponent implements OnInit{
 
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
-        firstName:[''],
-        lastName: [''],
-        email: ['']
+        firstName: ['', [Validators.required, Validators.minLength(2)]],
+        lastName: ['', [Validators.required, Validators.minLength(2)]],
+        email: ['', [Validators.required, 
+          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]]
       }),
       shippingAddress: this.formBuilder.group({
         street:[''],
@@ -75,8 +79,13 @@ export class CheckoutComponent implements OnInit{
       this.countries = data;
     }
     )
+    
 
   }
+
+  get firstName() {return this.checkoutFormGroup.get('customer.firstName');}
+  get lastName() {return this.checkoutFormGroup.get('customer.lastName');}
+  get email() {return this.checkoutFormGroup.get('customer.email');}
 
   onSubmit(){
     console.log(this.checkoutFormGroup.get('customer')!.value);
