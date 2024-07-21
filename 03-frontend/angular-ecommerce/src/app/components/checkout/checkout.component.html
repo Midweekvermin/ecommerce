@@ -10,9 +10,6 @@
                             <div class="col-md-9">
                                 <div class="input-space">
                                     <input formControlName="firstName" type="text">
-
-                                    <div *ngIf="checkoutFormGroup.get('customer.firstName')?.invalid && (checkoutFormGroup.get('customer.firstName')?.dirty || checkoutFormGroup.get('customer.firstName')?.touched)" class="alert alert-danger mt-1">
-                                        First Name is required and must be at least 2 characters
                                 </div>
                             </div>
                         </div>
@@ -23,9 +20,6 @@
                             <div class="col-md-9">
                                 <div class="input-space">
                                     <input formControlName="lastName" type="text">
-                                    <div *ngIf="checkoutFormGroup.get('customer.lastName')?.invalid && (checkoutFormGroup.get('customer.lastName')?.dirty || checkoutFormGroup.get('customer.lastName')?.touched)" class="alert alert-danger mt-1">
-                                        Last Name is required and must be at least 2 characters
-                                </div>
                                 </div>
                             </div>
                         </div>
@@ -36,9 +30,6 @@
                             <div class="col-md-9">
                                 <div class="input-space">
                                     <input formControlName="email" type="text">
-                                    <div *ngIf="checkoutFormGroup.get('customer.email')?.invalid && (checkoutFormGroup.get('customer.email')?.dirty || checkoutFormGroup.get('customer.email')?.touched)" class="alert alert-danger mt-1">
-                                        Must be a valid email address
-                                </div>
                                 </div>
                             </div>
                         </div>
@@ -256,7 +247,7 @@
                 <div class="text-center">
                     <button type="submit" class="btn btn-info">Purchase</button>
                 </div>
-                </div>
+
             </form>
         </div>
     </div>
