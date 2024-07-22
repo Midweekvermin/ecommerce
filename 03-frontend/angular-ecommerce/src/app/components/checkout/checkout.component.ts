@@ -54,10 +54,10 @@ export class CheckoutComponent implements OnInit{
         zipCode:['', [Validators.required, Validators.minLength(2), Shopvalidators.notOnlywhitespace]],
       }),
       creditCard: this.formBuilder.group({
-        cardType:[''],
-        nameOnCard:[''],
-        cardNumber:[''],
-        securityCode:[''],
+        cardType:['', [Validators.required]],
+        nameOnCard:['', [Validators.required, Validators.minLength(2), Shopvalidators.notOnlywhitespace]],
+        cardNumber:['', [Validators.required,Validators.pattern('[0-9]{16}')]],
+        securityCode:['', [Validators.required,Validators.pattern('[0-9]{3}')]],
         expirationMonth:[''],
         expirationYear:[''],
       }),
@@ -96,6 +96,9 @@ export class CheckoutComponent implements OnInit{
   get bstate() {return this.checkoutFormGroup.get('billingAddress.state');}
   get bcountry() {return this.checkoutFormGroup.get('billingAddress.country');}
   get bzipcode() {return this.checkoutFormGroup.get('billingAddress.zipCode');}
+  get cardt() {return this.checkoutFormGroup.get('creditCard.cardType');}
+  get cardn() {return this.checkoutFormGroup.get('creditCard.nameOnCard');}
+  get cardsc() {return this.checkoutFormGroup.get('creditCard.securityCode');}
   
 
   onSubmit(){

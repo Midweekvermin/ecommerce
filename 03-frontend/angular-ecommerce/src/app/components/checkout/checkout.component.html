@@ -230,6 +230,10 @@
                                         <option>Visa</option>
                                         <option>Mastercard</option>
                                     </select>
+                                    <div *ngIf="cardt?.invalid && (cardt?.dirty || cardt?.touched)"
+                                    class="alert alert-danger mt-1">
+                                        Please select a card type
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -240,6 +244,10 @@
                             <div class="col-md-9">
                                 <div class="input-space">
                                     <input formControlName="nameOnCard" type="text">
+                                    <div *ngIf="cardn?.invalid && (cardn?.dirty || cardn?.touched)"
+                                    class="alert alert-danger mt-1">
+                                        Please input the name on the card
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -250,6 +258,10 @@
                             <div class="col-md-9">
                                 <div class="input-space">
                                     <input formControlName="cardNumber" type="text">
+                                    <div *ngIf="cardn?.invalid && (cardn?.dirty || cardn?.touched)"
+                                    class="alert alert-danger mt-1">
+                                        Please check your card number
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -260,6 +272,10 @@
                             <div class="col-md-9">
                                 <div class="input-space">
                                     <input formControlName="securityCode" type="text">
+                                    <div *ngIf="cardsc?.invalid && (cardsc?.dirty || cardsc?.touched)"
+                                    class="alert alert-danger mt-1">
+                                        Please check the security code
+                                    </div>
                                 </div>
                             </div>
                         </div>
