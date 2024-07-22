@@ -29,7 +29,9 @@ public class CheckoutServiceImpl implements CheckoutService {
     public PurchaseResponse placeOrder(Purchase purchase) {
 
         Order order = purchase.getOrder();
+
         String orderTrackingNumber = generateOrderTrackingNumber();
+
         order.setOrderTrackingNumber(orderTrackingNumber);
 
         Set<OrderItem> orderItems = purchase.getOrderItems();

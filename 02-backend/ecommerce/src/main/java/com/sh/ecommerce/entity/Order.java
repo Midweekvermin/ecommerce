@@ -13,7 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "orders")
+@Table(name="orders")
 @Getter
 @Setter
 public class Order {
@@ -21,7 +21,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private long id;
+    private Long id;
     @Column(name="order_tracking_number")
     private String orderTrackingNumber;
     @Column(name="total_quantity")
@@ -40,10 +40,10 @@ public class Order {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "shipping_address_id", referencedColumnName = "id")
     private Address shippingAddress;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "billing_address_id", referencedColumnName = "id")
     private Address billingAddress;
 
