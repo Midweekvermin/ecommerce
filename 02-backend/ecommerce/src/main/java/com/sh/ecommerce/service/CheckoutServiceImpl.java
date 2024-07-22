@@ -9,10 +9,11 @@ import com.sh.ecommerce.entity.OrderItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.Set;
 import java.util.UUID;
-
+@CrossOrigin("http://localhost:4200")
 @Service
 public class CheckoutServiceImpl implements CheckoutService {
 
