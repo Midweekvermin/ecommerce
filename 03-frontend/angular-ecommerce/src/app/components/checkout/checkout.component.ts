@@ -4,6 +4,8 @@ import { ShopFormService } from '../../services/shop-form.service';
 import { Country } from '../../common/country';
 import { State } from '../../common/state';
 import { Shopvalidators } from '../../validators/shopvalidators';
+import { CartService } from '../../services/cart.service';
+import { CartItem } from '../../common/cart-item';
 
 @Component({
   selector: 'app-checkout',
@@ -21,6 +23,7 @@ export class CheckoutComponent implements OnInit{
 
     totalPrice: number = 0;
     totalQuantity: number = 0.00;
+    cartItems: CartItem[] = [];
     creditCardYears: number[] = [];
     creditCardMonths: number[] = [];
     countries:Country[] =[];
@@ -28,6 +31,8 @@ export class CheckoutComponent implements OnInit{
     
   constructor(private formBuilder:FormBuilder,
     private ShopFormService:ShopFormService,
+    private cartService: CartService,
+    
   ){}
 
   ngOnInit(): void {
@@ -61,7 +66,9 @@ export class CheckoutComponent implements OnInit{
         expirationMonth:[''],
         expirationYear:[''],
       }),
+      
     });
+    
 
     const startMonth: number = new Date().getMonth() +1;
 
@@ -79,8 +86,14 @@ export class CheckoutComponent implements OnInit{
       this.countries = data;
     }
     )
-    
+    this.listCartDetails();
 
+  }
+  listCartDetails() {
+    this.cartItems = this.cartService.cartItems;
+    this.cartService.totalPrice.subscribe(data => this.totalPrice = data);
+    this.cartService.totalQuantity.subscribe(data => this.totalQuantity = data);
+    this.cartService.computeCartTotals();
   }
 
   get firstName() {return this.checkoutFormGroup.get('customer.firstName');}
