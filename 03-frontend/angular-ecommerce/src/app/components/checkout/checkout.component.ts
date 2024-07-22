@@ -40,11 +40,11 @@ export class CheckoutComponent implements OnInit{
           Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Shopvalidators.notOnlywhitespace]]
       }),
       shippingAddress: this.formBuilder.group({
-        street:[''],
-        city:[''],
-        state:[''],
-        country:[''],
-        zipCode:[''],
+        street: ['', [Validators.required, Validators.minLength(2), Shopvalidators.notOnlywhitespace]],
+        city: ['', [Validators.required, Validators.minLength(2), Shopvalidators.notOnlywhitespace]],
+        state:['', [Validators.required]],
+        country:['', [Validators.required]],
+        zipCode: ['', [Validators.required, Validators.minLength(2), Shopvalidators.notOnlywhitespace]]
       }),
       billingAddress: this.formBuilder.group({
         street:[''],
@@ -86,6 +86,12 @@ export class CheckoutComponent implements OnInit{
   get firstName() {return this.checkoutFormGroup.get('customer.firstName');}
   get lastName() {return this.checkoutFormGroup.get('customer.lastName');}
   get email() {return this.checkoutFormGroup.get('customer.email');}
+  get sstreet() {return this.checkoutFormGroup.get('shippingAddress.street');}
+  get scity() {return this.checkoutFormGroup.get('shippingAddress.city');}
+  get sstate() {return this.checkoutFormGroup.get('shippingAddress.state');}
+  get scountry() {return this.checkoutFormGroup.get('shippingAddress.country');}
+  get szipcode() {return this.checkoutFormGroup.get('shippingAddress.zipCode');}
+  
 
   onSubmit(){
    if(this.checkoutFormGroup.invalid){
